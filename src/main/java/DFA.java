@@ -22,8 +22,36 @@ public class DFA {
 
     {
         dfa[i] = new State(i);
+//        System.out.println(dfa[i]);
     }
-        System.out.println(n);
+        String temp;
+        inputSymbols = new HashSet<>();
+
+        temp = scan.readLine();
+        start = Integer.parseInt(temp.substring(6));
+
+        temp = scan.readLine();
+        while (!temp.startsWith("final")) {
+            StringTokenizer st = new StringTokenizer(temp);
+
+            int from = Integer.parseInt(st.nextToken());
+            String at = st.nextToken();
+            int to = Integer.parseInt(st.nextToken());
+            dfa[from].put(at, dfa[to]);
+            inputSymbols.add(at);
+            temp = scan.readLine();
+        }
+
+
+        final_states = new Group(0);
+
+        StringTokenizer st = new StringTokenizer(temp);
+        st.nextToken();
+        while (st.hasMoreTokens()) {
+            final_states.add(dfa[Integer.parseInt(st.nextToken())]);
+        }
+
+
 }
 
 
@@ -31,6 +59,7 @@ public class DFA {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("1 - NFA to DFA");
+        System.out.println(dfa);
 //        System.out.println("2 - Minimize DFA");
 //
 //        int choice = sc.nextInt();
