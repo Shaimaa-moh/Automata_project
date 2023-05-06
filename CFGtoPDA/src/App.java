@@ -11,14 +11,18 @@ public class App {
         try {
             this.ReceiveCFGInput();
             this.ConvertCFGtoPDA();
+            this.DrawPDA();
         }
         catch(IOException e){
             System.out.println(e.getMessage());
         }
     }
 
+    public void DrawPDA() {
+    }
+
     private void ConvertCFGtoPDA() {
-        this.language.GNFtoPDA();
+        this.language.DCFGtoDPDA();
     }
 
 
@@ -90,15 +94,4 @@ public class App {
     }
 
 
-    public void ProcessCFGInput() {
-        //language.cfg.simplify();
-        //language.cfg.toChomsky();
-        //language.cfg.toGreibach();
-    }
-
-    public void CreatePDA() {
-    }
-
-    public void DrawPDA() {
-    }
 }

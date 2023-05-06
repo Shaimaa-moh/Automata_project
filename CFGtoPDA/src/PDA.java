@@ -1,15 +1,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.MutableTriple;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
-import org.apache.commons.collections4.map.LinkedMap;
-import org.apache.commons.collections4.map.MultiKeyMap;
+
 
 public class PDA {
 
@@ -40,7 +35,7 @@ public class PDA {
         this.states.add("qf"); //final state
         this.pdaInputs = (ArrayList<String>) cfg.getTList().clone();
         this.stackInputs = (ArrayList<String>) cfg.getVList().clone();
-        this.stackInputs.add("z"); //final
+        this.stackInputs.add("z"); //start stack symbol
         this.startState = "q0";
         this.startSymbol = "z";
         this.finalStates.add("qf");

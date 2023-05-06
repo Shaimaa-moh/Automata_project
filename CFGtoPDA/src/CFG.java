@@ -1,8 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
+
 
 public class CFG {
 
@@ -27,32 +25,6 @@ public class CFG {
         //this.TList.add("ε");
 
     }
-
-    //removes λ(null)-productions, unit-productions, and useless productions
-    public void simplify(){
-        //this.removeNullable(this.findNullable());
-        //Vector <String> nullableVars= this.findNullable();
-        //System.out.println(nullableVars);
-        //if(nullableVars.containsAll(List.of(concatenate(this.TList, this.VList)))){
-        //    System.out.println("not context-free");
-        //}
-        //else{
-        //    System.out.println(this.PMap);
-        //}
-    }
-    public <T> T[] concatenate(T[] a, T[] b) {
-        int aLen = a.length;
-        int bLen = b.length;
-
-        @SuppressWarnings("unchecked")
-        T[] c = (T[]) Array.newInstance(a.getClass().getComponentType(), aLen + bLen);
-        System.arraycopy(a, 0, c, 0, aLen);
-        System.arraycopy(b, 0, c, aLen, bLen);
-
-        return c;
-    }
-    public void toChomsky(){}
-    public void toGreibach(){}
 
     //N.B. ε is what we're looking for.
 
