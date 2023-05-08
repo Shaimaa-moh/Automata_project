@@ -2,7 +2,6 @@ import org.apache.commons.lang3.tuple.MutableTriple;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Language {
 
@@ -13,6 +12,7 @@ public class Language {
 //    CFG cnf = new CFG(cfg); //Chomsky's Normal Form
 //    CFG gnf = new CFG(cfg); //Greibach's Normal Form
     PDA pda = new PDA(cfg); //Pushdown Automata
+    PDAGraph pdaGraph = new PDAGraph();
 
 
 
@@ -20,7 +20,6 @@ public class Language {
     //converts deterministic context-free grammar to pda.
     public void DCFGtoDPDA(){
 
-        PDAGraph pdaGraph = new PDAGraph();
 
         // step 1: q0 -> q1 where ε, ε->z
         String q0 = pdaGraph.addState(); //initial state
@@ -49,11 +48,13 @@ public class Language {
                 String tempPop=null, oldState=null, newState=null;
                 if(RHS_rule.length() == 1){ //corner case to save time: if rule length is 1, just a single trans.
 
+                    /*
                     System.out.println("LHS: " + LHS + "  RHS: " + RHS);
                     System.out.println("RHS_rule: " + RHS_rule);
                     System.out.println("Transition added: q2, q2, "
                             + "ε, " + LHS + ", " + RHS_rule);
 
+                    */
                     pdaGraph.addTrans("q2", "q2", MutableTriple.of("ε", LHS, RHS_rule));
                 }
                 else{
@@ -75,10 +76,12 @@ public class Language {
                             newState = pdaGraph.addState();
                         }
 
+                        /*
                         System.out.println("LHS: " + LHS + "  RHS: " + RHS);
                         System.out.println("RHS_rule: " + RHS_rule + "  RHS_rule_char: " + RHS_rule_char);
                         System.out.println("Transition added: " + oldState + ", " + newState + ", "
                                 + "ε, " + tempPop + ", " + RHS_rule_char);
+                         */
 
                         pdaGraph.addTrans(oldState, newState, MutableTriple.of("ε", tempPop, RHS_rule_char));
                     }
@@ -95,42 +98,15 @@ public class Language {
         // step 5: q2 -> qf , a final state
         String qf = pdaGraph.addState("qf");
         pdaGraph.addTrans("q2", "qf", MutableTriple.of("ε", "z", "ε"));
-        pdaGraph.printGraph();
+
+        //pdaGraph.printGraph();
 
 
 
 
     }
 
-//    public void DCFGtoDPDA(){
-//        System.out.println(pda.toString());
-//
-//
-//        //first move: δ (q0, λ, z) = {(q1, Sz)}
-//        ArrayList<MutablePair<String, String>> tempArrPair = new ArrayList<>();
-//
-//        tempArrPair.removeAll(tempArrPair);
-//        tempArrPair.add(new MutablePair<>("q1", "Sz")); //next state
-//        System.out.println("tempArrPair: " + tempArrPair);
-//        this.addTransitionPDA("q0","ε","z", tempArrPair);
-//
-//
-//        //final move: δ (q1, λ, z) = {(qf, z)}
-//        tempArrPair.removeAll(tempArrPair);
-//        tempArrPair.add(new MutablePair<>("qf", "z"));
-//        System.out.println("tempArrPair: " + tempArrPair);
-//        this.addTransitionPDA("q1","ε","z", tempArrPair);
-//
-//        System.out.println("hashmap transitions: " + pda.transitions);
-//
-//
-//        //step 3: (q1, u) ∈ δ (q1, a, A), whenever A → au
-//        //step 4: If λ ∈ L, we add to the constructed npda the transition: δ (q0, ε, z) = {(qf, z)}
-//
-//    }
-//    public void addTransitionPDA(String q, String a, String c, ArrayList<MutablePair<String, String>> tempArrPair){
-//        this.pda.transitions.put(MutableTriple.of(q, a, c), tempArrPair);
-//    }
+
 
 
 

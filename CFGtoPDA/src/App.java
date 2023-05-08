@@ -19,6 +19,7 @@ public class App {
     }
 
     public void DrawPDA() {
+        this.language.pdaGraph.printGraph();
     }
 
     private void ConvertCFGtoPDA() {
