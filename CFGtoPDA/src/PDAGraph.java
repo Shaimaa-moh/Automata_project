@@ -1,3 +1,4 @@
+
 import org.apache.commons.lang3.tuple.MutableTriple;
 
 import java.util.*;
@@ -75,6 +76,7 @@ public class PDAGraph {
         tempArr = this.wdigraph.get(q0); //q0: {this part}
         tempArr.add(tempTrans);
         //printing all transitions
+        /*
         for (HashMap.Entry<String, ArrayList<Transition>> node: this.wdigraph.entrySet()) {
 
             for (int i = 0; i < node.getValue().size(); i++) {
@@ -85,9 +87,10 @@ public class PDAGraph {
                         + node.getValue().get(i).weight.push + ")");
             }
         }
+        */
 
-
-            System.out.println();
+            //this.printGraph();
+            //System.out.println();
         //finally
         this.wdigraph.put(q0, tempArr);
         }
@@ -97,9 +100,26 @@ public class PDAGraph {
 
 
     public void printGraph() {
+
+        TreeMap<String, ArrayList<Transition>> sorted = new TreeMap<>();
+        // Copy all data from hashMap into TreeMap (sorting)
+        sorted.putAll(this.wdigraph);
+        for (Map.Entry<String, ArrayList<Transition>> entry : sorted.entrySet()){
+            System.out.print("State = " + entry.getKey() + ", Transition = {");
+            for(int i = 0 ; i < entry.getValue().size(); i++){
+                Transition tempTrans = entry.getValue().get(i);
+                System.out.println(tempTrans.to + ", "
+                + "(" + tempTrans.weight.read + ", "
+                + tempTrans.weight.pop + ", "
+                + tempTrans.weight.push + ")");
+
+            }
+            System.out.println("}");
+        }
+        System.out.println();
         System.out.println("hashmap: "+ this.wdigraph);
         System.out.println("values: " + this.wdigraph.values());
-        //this.wdigraph.get("q0").;
+
 
     }
 
