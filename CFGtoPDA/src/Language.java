@@ -39,43 +39,63 @@ public class Language {
             pdaGraph.addTrans("q2", "q2", MutableTriple.of(cfg.getTList().get(i), cfg.getTList().get(i), "ε"));
         }
 
-        // step 4: q2 -> qf , a final state
-        String qf = pdaGraph.addState("qf");
-        pdaGraph.addTrans("q2", "qf", MutableTriple.of("ε", "z", "ε"));
-        pdaGraph.printGraph();
-
-        //step 5: fill qloop (q2)
+        //step 4: fill qloop (q2)
         // S -> aBc | ab
         for (HashMap.Entry<String, ArrayList<String>> rule : cfg.getPMap().entrySet()) {
             String LHS = rule.getKey(); // returns "S"
             ArrayList<String> RHS = rule.getValue(); // returns " {aBc, ab}
             for(int i = 0; i < RHS.size(); i++){
                 String RHS_rule = RHS.get(i); // returns aBc
-                for(int j = 0; j < RHS_rule.length(); j++){  //loops over aBc, char by char
-                    String RHS_rule_char = String.valueOf(RHS_rule.charAt(RHS_rule.length() - j - 1)); //returns c
-                    String tempPop=null, oldState=null, newState=null;
-                    if(j == 0){
-                        tempPop = LHS;
-                        oldState = "q2";
-                        newState = pdaGraph.addState();
-                    }
-                    else if(j == RHS_rule.length() - 1){
-                        tempPop = "ε";
-                        oldState = newState;
-                        newState = "q2";
-                    }
-                    else{
-                        newState = pdaGraph.addState();
-                    }
+                String tempPop=null, oldState=null, newState=null;
+                if(RHS_rule.length() == 1){ //corner case to save time: if rule length is 1, just a single trans.
 
+                    System.out.println("LHS: " + LHS + "  RHS: " + RHS);
+                    System.out.println("RHS_rule: " + RHS_rule);
+                    System.out.println("Transition added: q2, q2, "
+                            + "ε, " + LHS + ", " + RHS_rule);
 
-                    pdaGraph.addTrans(oldState, newState, MutableTriple.of("ε", tempPop, RHS_rule_char));
+                    pdaGraph.addTrans("q2", "q2", MutableTriple.of("ε", LHS, RHS_rule));
                 }
+                else{
+                    for(int j = 0; j < RHS_rule.length(); j++){  //loops over aBc, char by char
+                        String RHS_rule_char = String.valueOf(RHS_rule.charAt(RHS_rule.length() - j - 1)); //returns c
+                        if(j == 0){
+                            tempPop = LHS;
+                            oldState = "q2";
+                            newState = pdaGraph.addState();
+                        }
+                        else if(j == RHS_rule.length() - 1){
+                            tempPop = "ε";
+                            oldState = newState;
+                            newState = "q2";
+                        }
+                        else{
+                            tempPop = "ε";
+                            oldState = newState;
+                            newState = pdaGraph.addState();
+                        }
+
+                        System.out.println("LHS: " + LHS + "  RHS: " + RHS);
+                        System.out.println("RHS_rule: " + RHS_rule + "  RHS_rule_char: " + RHS_rule_char);
+                        System.out.println("Transition added: " + oldState + ", " + newState + ", "
+                                + "ε, " + tempPop + ", " + RHS_rule_char);
+
+                        pdaGraph.addTrans(oldState, newState, MutableTriple.of("ε", tempPop, RHS_rule_char));
+                    }
+                }
+
 
             }
 
 
         }
+
+
+
+        // step 5: q2 -> qf , a final state
+        String qf = pdaGraph.addState("qf");
+        pdaGraph.addTrans("q2", "qf", MutableTriple.of("ε", "z", "ε"));
+        pdaGraph.printGraph();
 
 
 

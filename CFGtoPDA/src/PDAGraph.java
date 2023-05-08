@@ -1,3 +1,4 @@
+
 import org.apache.commons.lang3.tuple.MutableTriple;
 
 import java.util.*;
@@ -86,7 +87,7 @@ public class PDAGraph {
             }
         }
 
-
+            this.printGraph();
             System.out.println();
         //finally
         this.wdigraph.put(q0, tempArr);
