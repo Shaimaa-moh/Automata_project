@@ -20,7 +20,7 @@ public class NFA {
         this.Final = Final;
 
     }
-    
+
 }
 
 //    public void convert(){
