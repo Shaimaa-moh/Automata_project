@@ -106,8 +106,9 @@ for (int i=0 ; i<trans_no;i++){
     System.out.print("NFA table is : ");
 
 
- for(Map.Entry<Integer, Map<String, Set<Integer >>> set:table.table.entrySet()) {
-     System.out.print(set.getKey() + "->" + set.getValue());
+ for(Integer i : table.table.keySet()) {
+     System.out.print(i + "->" + table.table.get(i));
+     System.out.println();
 
 
  }
@@ -121,13 +122,15 @@ for (int i=0 ; i<trans_no;i++){
  //DFA_states.add(start_dfa); //list feha q0
  // Map <String, Set<Integer>> s= table.table.get(table.table.keySet().toArray()[0]); //value of first key
          ArrayList<String> Alpha = new ArrayList<>();
+
  Map<String, Set<Integer>> values= table.table.get (table.table.keySet());
-for(Map.Entry<String, Set<Integer>> set:values.entrySet()){
-  Alpha.add(set.getKey()) ;
+//for(Map.Entry<String, Set<Integer>> set:values.entrySet()){
+for(String i : values.keySet()){
+  Alpha.add(i) ;
 
 }
 for (int k=0;k<Alpha.size();k++) {
-    System.out.println("inputs are " + Alpha);
+    System.out.println("inputs are " + Alpha.get(k));
 }
 //find the possible set of states for each input symbol. If this set of states is not in Q', then add it to Q'.
  // we can split transition to get alphabet
