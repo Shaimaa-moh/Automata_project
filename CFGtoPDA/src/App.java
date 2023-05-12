@@ -20,6 +20,9 @@ public class App {
 
     public void DrawPDA() {
         this.language.pdaGraph.printGraph();
+        GUI graphviz = new GUI();
+        //graphviz.toDOT(this.language.pdaGraph);
+        //graphviz.toGraph(graphviz.dot);
     }
 
     private void ConvertCFGtoPDA() {
