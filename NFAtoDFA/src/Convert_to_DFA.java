@@ -25,19 +25,19 @@ public class Convert_to_DFA {
     void generate_nfa()
     {
         Scanner AlphabetCount = new Scanner(System.in);
-        System.out.println("Enter no_of alphabets");
+        System.out.println("Enter no. of alphabets");
         noAlphabets= AlphabetCount.nextInt(); // store
         for (int i =0; i < noAlphabets ;i++)
         {
             Scanner Alphabetinput = new Scanner(System.in);
-            System.out.println(" enter the alphabets");
+            System.out.println("Enter the alphabets");
             alphabets.add(Alphabetinput.nextLine());
 
         }
         System.out.println (alphabets);
 
         Scanner NO_states = new Scanner(System.in);
-        System.out.println("Enter no_of states");
+        System.out.println("Enter no. of states");
         noStates= NO_states.nextInt(); // store
 
         for (int i =0; i < noStates ;i++)
@@ -63,13 +63,13 @@ public class Convert_to_DFA {
         startState = startSt .nextLine(); // store
 
         Scanner FinalSt = new Scanner(System.in);
-        System.out.println("Enter Final state");
+        System.out.println("Enter final state");
         String finalState = FinalSt.nextLine(); // store
         Nfa_Finalstates.add(finalState);
 
-        Scanner tranistion_in = new Scanner(System.in);
-        System.out.println("Enter no of transitions state");
-        int trans_no = tranistion_in.nextInt(); // store
+        Scanner transition_in = new Scanner(System.in);
+        System.out.println("Enter no. of transitions state");
+        int trans_no = transition_in.nextInt(); // store
 
 
         for (int i=0 ; i<trans_no;i++){
@@ -92,13 +92,13 @@ public class Convert_to_DFA {
 
                 NFATable.put(currState,inAlpha,new ArrayList<>());
             }
-            arr=(ArrayList<String>) NFATable.get(currState,inAlpha).clone();
+            arr= (ArrayList<String>) NFATable.get(currState,inAlpha).clone();
             arr.add(nextSt);
             NFATable.put(currState,inAlpha,arr);
 
         }
 
-        System.out.println("NFA Table is : " +NFATable) ;
+        System.out.println("NFA Table is: " +NFATable) ;
         System.out.println();
     }
 
@@ -142,9 +142,9 @@ public class Convert_to_DFA {
         }
 
         System.out.println("\n");
-        System.out.println("DFA Table is : " +DFATable) ;
-        System.out.println("DFA states are : " + newStates) ; //[q0, q0_q1, q0_q2]
-        System.out.println("DFA final states are : " + DFAfinalStates) ;
+        System.out.println("DFA Table is: " +DFATable) ;
+        System.out.println("DFA states are: " + newStates) ; //[q0, q0_q1, q0_q2]
+        System.out.println("DFA final states are: " + DFAfinalStates) ;
 
     }
 
@@ -174,7 +174,7 @@ public class Convert_to_DFA {
                 newStates.add(cell.getValue());
                 for(int i = 0; i < alphabets.size(); i++){
                     DFATable.put(cell.getValue(), alphabets.get(i), "");
-                    System.out.println("new row " + cell.getValue() + " alphabets "+ alphabets.get(i) + " value ");
+                    System.out.println("new (empty) cell added, row: " + cell.getValue() + " col: "+ alphabets.get(i));
 
                 }
             }
